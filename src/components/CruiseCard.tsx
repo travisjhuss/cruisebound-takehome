@@ -29,6 +29,7 @@ interface CruiseCardProps {
 const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
     const { departureDate, returnDate, name, region, duration, ship, price, itinerary } = cruiseData;
     const formattedDateRange = formatDateRange(departureDate, returnDate);
+    const placeholderImage = "https://res.cloudinary.com/cruisebound/image/upload/f_auto/v1656397931/production/small_msc_vi_item_76c6c4b53c.png";
 
     return (
         <div className="flex flex-col max-w-4xl shadow-[5px_5px_10px_0_rgba(0,0,0,0.1)] rounded-xl w-full md:flex-row">
@@ -39,11 +40,11 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                     </span>
                 </div>
                 <Image
-                    src={ship.image}
+                    src={ship.image ? ship.image : placeholderImage}
                     alt="Cruise Ship"
                     width={500}
                     height={550}
-                    className="rounded-t-xl md:rounded-l-xl md:rounded-tr-none object-cover"
+                    className="w-full h-full rounded-t-xl md:rounded-l-xl md:rounded-tr-none object-cover"
                 />
             </div>
             <div className="flex flex-col w-full">
@@ -54,7 +55,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                             <p className="text-sm font-medium text-gray-500">{region}</p>
                             <p className="text-sm font-medium text-gray-500">{duration} nights</p>
                             <div className="flex flex-row items-center">
-                                <Image src="/star.svg" alt="Star" width={16} height={16} />
+                                <Image src="/star.svg" alt="Star" width={18} height={18} className="flex self-start" />
                                 <p className="text-sm pr-[4px]">{ship.rating}</p>
                                 <p className="text-xs text-gray-400">{ship.reviews} reviews</p>
                             </div>
@@ -72,7 +73,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                             )})}
                         </div>
                     </div>
-                    <div className="mt-4 min-w-[100px]">
+                    <div className="flex flex-col items-end mt-4 mb-4 min-w-[100px] space-y-1">
                         {ship.line.logo && 
                             <Image 
                                 src={ship.line.logo}
@@ -82,6 +83,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                                 className="rounded-l-xl"
                             />
                         }
+                        <span className="text-xs align-right font-medium text-gray-500">{ship.name}</span>
                     </div>
                 </div>
                 <div className="flex flex-row justify-end py-3 px-5 space-x-4 basis-1/3 bg-gray-50">
