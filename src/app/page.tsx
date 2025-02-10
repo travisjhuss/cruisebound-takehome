@@ -7,12 +7,13 @@ import SortBy from "@/components/SortBy";
 import { SelectChangeEvent } from "@mui/material";
 import { sortCruises } from "@/utils/sortCruises";
 import Drawer from "@/components/Drawer";
+import NoResults from "@/components/NoResults";
 
 export default function Home() {
     const [cruiseData, setCruiseData] = useState([]);
     const [page, setPage] = useState(0);
     const [sortValue, setSortValue] = useState('price-desc');
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(true);
     const [filterDepartureBy, setFilterDepartureBy] = useState('');
     const [filterCruiselineBy, setFilterCruiselineBy] = useState('');
     
@@ -74,7 +75,7 @@ export default function Home() {
 
 
     return (
-        <div className="flex flex-row w-full h-full">
+        <div className="flex flex-col md:flex-row w-full h-full">
             <Drawer
                 open={drawerOpen}
                 toggleDrawer={setDrawerOpen}
@@ -96,9 +97,10 @@ export default function Home() {
                         <p className="text-xs">Reset filters</p>
                     </button>
                 </div>
-                {paginatedData[page]?.map((cruise, i) => (
+                {paginatedData.length !== 0 ? paginatedData[page]?.map((cruise, i) => (
                     <CruiseCard cruiseData={cruise} key={i} />
-                ))}
+                )) : <NoResults />
+                }
                 <div className="w-full max-w-4xl text-left">
                     <PaginationComponent count={paginatedData.length} activePage={page + 1} handleChange={handlePageChange} />
                 </div>
