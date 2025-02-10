@@ -17,11 +17,11 @@ export default function Home() {
     const [filterCruiselineBy, setFilterCruiselineBy] = useState('');
     
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('https://sandbox.cruisebound-qa.com/sailings')
-            const result = await response.json()
-            setCruiseData(result.results)
-        }
+        const fetchData = async () => {
+            const response = await fetch('/api/proxy');
+            const result = await response.json();
+            setCruiseData(result.results);
+        };
         
         fetchData()
     }, [])
