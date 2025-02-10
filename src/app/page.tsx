@@ -1,15 +1,16 @@
 'use client'
 import { useEffect, useMemo, useState } from "react";
-import CruiseCard, { CruiseData } from "@/components/CruiseCard";
+import { CruiseData } from "@/components/CruiseCard";
 import { paginateResults } from "@/utils/paginateResults";
 import PaginationComponent from "@/components/Pagination";
 import SortBy from "@/components/SortBy";
 import { SelectChangeEvent } from "@mui/material";
 import { sortCruises } from "@/utils/sortCruises";
 import Drawer from "@/components/Drawer";
-import NoResults from "@/components/NoResults";
+import CruiseResults from "@/components/CruiseResults";
 
 export default function Home() {
+    const [isLoading, setIsLoading] = useState(true);
     const [cruiseData, setCruiseData] = useState([]);
     const [page, setPage] = useState(0);
     const [sortValue, setSortValue] = useState('price-desc');
@@ -18,9 +19,16 @@ export default function Home() {
     
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('/api/proxy');
-            const result = await response.json();
-            setCruiseData(result.results);
+            setIsLoading(true);
+            try {
+                const response = await fetch('/api/proxy');
+                const result = await response.json();
+                setCruiseData(result.results);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
         };
         
         fetchData()
@@ -68,7 +76,7 @@ export default function Home() {
         return sortCruises(filteredByCruiseline, sortValue);
     }, [filteredByCruiseline, sortValue]);
 
-    const paginatedData = useMemo(() => paginateResults(sortedData, 10), [sortedData, page, sortValue]);
+    const paginatedData: CruiseData[][] = useMemo(() => paginateResults(sortedData, 10), [sortedData, page, sortValue]);
 
 
     return (
@@ -79,7 +87,7 @@ export default function Home() {
                 handleDepartureFilterChange={handleDepartureFilterChange}
                 handleCruiselineFilterChange={handleCruiselineFilterChange}
             />
-            <div className="flex flex-col space-y-5 w-full justify-center items-center p-6">
+            <div className="flex flex-col space-y-5 w-full h-full justify-center items-center p-6">
                 <div className="w-full max-w-4xl text-right">
                     <SortBy value={sortValue} handleChange={handleSortChange} />
                 </div>
@@ -92,10 +100,7 @@ export default function Home() {
                         <p className="text-xs">Reset filters</p>
                     </button>
                 </div>
-                {paginatedData.length !== 0 ? paginatedData[page]?.map((cruise, i) => (
-                    <CruiseCard cruiseData={cruise} key={i} />
-                )) : <NoResults />
-                }
+                <CruiseResults cruiseResults={paginatedData} page={page} isLoading={isLoading} />
                 <div className="w-full max-w-4xl text-left">
                     <PaginationComponent count={paginatedData.length} activePage={page + 1} handleChange={handlePageChange} />
                 </div>
