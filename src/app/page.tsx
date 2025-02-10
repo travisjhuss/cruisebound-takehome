@@ -26,6 +26,11 @@ export default function Home() {
         fetchData()
     }, [])
 
+    const resetFilters = () => {
+        setFilterDepartureBy('');
+        setFilterCruiselineBy('');
+    };
+
     const handleDepartureFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFilterDepartureBy(event.target.value);
     };
@@ -82,8 +87,14 @@ export default function Home() {
                 <div className="w-full max-w-4xl text-right">
                     <SortBy value={sortValue} handleChange={handleSortChange} />
                 </div>
-                <div className="w-full max-w-4xl text-left">
-                    <span>{sortedData.length} trips found [reset]</span>
+                <div className="flex flex-row w-full h-[30px] items-center max-w-4xl text-left">
+                    <span>{sortedData.length} trips found</span>
+                    <button 
+                        className="ms-3 p-1 border rounded-sm hover:border-blue-500 hover:border-2 hover:bg-gray-100 shadow-[2px_2px_5px_0_rgba(0,0,0,0.1)"
+                        onClick={resetFilters}
+                    >
+                        <p className="text-xs">Reset filters</p>
+                    </button>
                 </div>
                 {paginatedData[page]?.map((cruise, i) => (
                     <CruiseCard cruiseData={cruise} key={i} />
