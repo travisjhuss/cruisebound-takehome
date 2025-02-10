@@ -12,7 +12,7 @@ interface CruiseResultsProps {
 const CruiseResults: React.FC<CruiseResultsProps> = ({cruiseResults, page, isLoading}) => {
 
     if (isLoading) {
-        return (<Skeleton variant="rounded" width="100%" height={200} />);
+        return (<Skeleton variant="rounded" animation="wave" width="100%" height={200} />);
     }
 
     return (

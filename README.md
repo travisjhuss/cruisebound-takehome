@@ -2,7 +2,9 @@
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and styled with [Tailwind CSS](https://tailwindcss.com/docs).
 
-The app consists of the “Search Results Page” as designed in the given PDF for desktop. Mobile responsiveness created best on intuition. 
+The app consists of the “Search Results Page” as designed in the given PDF for desktop. Mobile responsiveness created best on intuition.
+
+
 
 ## Getting Started
 

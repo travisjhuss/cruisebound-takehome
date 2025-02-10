@@ -48,7 +48,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                 />
             </div>
             <div className="flex flex-col w-full">
-                <div className="flex flex-row justify-between px-4 basis-2/3">
+                <div className="flex flex-col md:flex-row justify-between px-4 basis-2/3">
                     <div className="py-3">
                         <h2 className="text-xl font-semibold pb-1">{name}</h2>
                         <div className="flex flex-row space-x-4 pb-3">
@@ -73,7 +73,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                             )})}
                         </div>
                     </div>
-                    <div className="flex flex-col items-end mt-4 mb-4 min-w-[100px] space-y-1">
+                    <div className="flex justify-between items-center md:justify-start md:flex-col md:items-end mt-4 mb-4 min-w-[100px] space-y-1">
                         {ship.line.logo && 
                             <Image 
                                 src={ship.line.logo}
