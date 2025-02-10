@@ -83,7 +83,7 @@ const CruiseCard: FC<CruiseCardProps> = ({cruiseData}) => {
                                 className="rounded-l-xl"
                             />
                         }
-                        <span className="text-xs align-right font-medium text-gray-500">{ship.name}</span>
+                        <span className="text-xs align-right text-nowrap font-medium text-gray-500">{ship.name}</span>
                     </div>
                 </div>
                 <div className="flex flex-row justify-end py-3 px-5 space-x-4 basis-1/3 bg-gray-50">
