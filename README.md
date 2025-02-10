@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 The app consists of the “Search Results Page” as designed in the given PDF for desktop. Mobile responsiveness created best on intuition.
 
-
+Material UI was used to help with pagination, sorting select, and loading state.
 
 ## Getting Started
 
