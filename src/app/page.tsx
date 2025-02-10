@@ -31,7 +31,7 @@ export default function Home() {
             }
         };
         
-        fetchData()
+        fetchData();
     }, [])
 
     const resetFilters = () => {
@@ -44,7 +44,6 @@ export default function Home() {
     };
 
     const handleCruiselineFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("🚀 ~ inside handle cruilseine filter change")
         setFilterCruiselineBy(event.target.value);
     };
 
