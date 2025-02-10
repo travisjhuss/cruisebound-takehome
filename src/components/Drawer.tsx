@@ -14,7 +14,7 @@ const Drawer: React.FC<DrawerProps> = ({
     open, filterDepartureBy, filterCruiselineBy, handleDepartureFilterChange, handleCruiselineFilterChange, toggleDrawer
 }) => {
     return (
-        <div className="sticky top-0 h-screen w-64 bg-[#0F1829] py-5 px-4">
+        <div className="sticky top-0 h-screen w-64 bg-[#0F1829] pt-5 pb-7 px-4 flex flex-col justify-between items-center">
             <div className="flex flex-col space-y-5">
                 <div className="flex justify-end">
                     <button onClick={() => toggleDrawer(false)} className="bg-[#32394A] hover:bg-blue-700 rounded-sm p-1">
@@ -42,6 +42,13 @@ const Drawer: React.FC<DrawerProps> = ({
                     />
                 </div>
             </div>
+            <Image 
+                src="/cruisebound.png"
+                alt="Cruise Logo"
+                width={130}
+                height={150} 
+                className="rounded-l-xl"
+            />
         </div>
     );
 };
