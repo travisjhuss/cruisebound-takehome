@@ -2,16 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 
 interface DrawerProps {
-    open: boolean;
     filterDepartureBy: string;
     filterCruiselineBy: string;
     handleDepartureFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleCruiselineFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    toggleDrawer: (open: boolean) => void;
 }
 
 const Drawer: React.FC<DrawerProps> = ({
-    open, filterDepartureBy, filterCruiselineBy, handleDepartureFilterChange, handleCruiselineFilterChange, toggleDrawer
+    filterDepartureBy, filterCruiselineBy, handleDepartureFilterChange, handleCruiselineFilterChange
 }) => {
     return (
         <div className="md:sticky md:top-0 md:h-screen md:w-64 bg-[#0F1829] pt-5 pb-2 md:pb-7 px-4 flex flex-col-reverse md:flex-col justify-between items-center">

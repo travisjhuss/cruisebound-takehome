@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useMemo, useState } from "react";
-import CruiseCard from "@/components/CruiseCard";
+import CruiseCard, { CruiseData } from "@/components/CruiseCard";
 import { paginateResults } from "@/utils/paginateResults";
 import PaginationComponent from "@/components/Pagination";
 import SortBy from "@/components/SortBy";
@@ -13,7 +13,6 @@ export default function Home() {
     const [cruiseData, setCruiseData] = useState([]);
     const [page, setPage] = useState(0);
     const [sortValue, setSortValue] = useState('price-desc');
-    const [drawerOpen, setDrawerOpen] = useState(true);
     const [filterDepartureBy, setFilterDepartureBy] = useState('');
     const [filterCruiselineBy, setFilterCruiselineBy] = useState('');
     
@@ -49,7 +48,7 @@ export default function Home() {
     };
 
     const filteredByDeparture = useMemo(() => {
-        return cruiseData.filter((cruise: any) => {
+        return cruiseData.filter((cruise: CruiseData) => {
             const departurePort = cruise?.itinerary[0] ?? '';
             const search = filterDepartureBy.toLowerCase();
             return departurePort?.toLowerCase().includes(search);
@@ -57,13 +56,12 @@ export default function Home() {
     }, [cruiseData, filterDepartureBy]);
 
     const filteredByCruiseline = useMemo(() => {
-        return filteredByDeparture.filter((cruise: any) => {
+        return filteredByDeparture.filter((cruise: CruiseData) => {
             const cruiseline = cruise?.ship.line.name ?? '';
             const search = filterCruiselineBy.toLowerCase();
             return cruiseline?.toLowerCase().includes(search);
         });
     }, [filteredByDeparture, filterCruiselineBy]);
-    console.log("🚀 ~ filteredByCruiseline ~ filteredByCruiseline:", filteredByCruiseline)
 
     const sortedData = useMemo(() => {
         setPage(0);
@@ -71,14 +69,11 @@ export default function Home() {
     }, [filteredByCruiseline, sortValue]);
 
     const paginatedData = useMemo(() => paginateResults(sortedData, 10), [sortedData, page, sortValue]);
-    console.log("🚀 ~ Home ~ paginatedData:", paginatedData)
 
 
     return (
         <div className="flex flex-col md:flex-row w-full h-full">
             <Drawer
-                open={drawerOpen}
-                toggleDrawer={setDrawerOpen}
                 filterDepartureBy={filterDepartureBy}
                 filterCruiselineBy={filterCruiselineBy}
                 handleDepartureFilterChange={handleDepartureFilterChange}

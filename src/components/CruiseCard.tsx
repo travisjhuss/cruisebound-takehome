@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Image from "next/image";
 import { formatDateRange } from '@/utils/dateRangeFormatter';
 
-type CruiseData = {
+export type CruiseData = {
     departureDate: string;
     duration: number;
     itinerary: [string];

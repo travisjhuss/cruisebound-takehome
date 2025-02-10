@@ -1,4 +1,6 @@
-export const sortCruises = (cruises: any[], sortKey: string) => {
+import { CruiseData } from "@/components/CruiseCard";
+
+export const sortCruises = (cruises: CruiseData[], sortKey: string) => {
     switch (sortKey) {
         case 'price-asc':
             return cruises.sort((a, b) => a.price - b.price);
